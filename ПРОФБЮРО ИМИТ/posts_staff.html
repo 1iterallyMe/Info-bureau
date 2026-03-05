@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Админка: Добавить преподавателя</title>
+    <style>
+        body { font-family: sans-serif; max-width: 500px; margin: 50px auto; }
+        form { display: flex; flex-direction: column; gap: 10px; }
+        input, textarea { padding: 10px; }
+        button { background: #3ecf8e; color: white; border: none; padding: 10px; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+    <h2>Добавить преподавателя</h2>
+    <form id="postForm">
+        <input type="text" id="title" placeholder="Имя преподавателя и предмет" required>
+        <textarea id="content" placeholder="Описание..." rows="5" required></textarea>
+        <input type="url" id="image_url" placeholder="Ссылка на фото (URL)" required>
+        <button type="submit">Опубликовать в Postgres</button>
+    </form>
+
+    <div id="status"></div>
+
+    <!-- Подключаем библиотеку Supabase -->
+    <script src="https://cdn.jsdelivr.net"></script>
+    <script>
+        // Данные из настроек Supabase
+        const SUPABASE_URL = 'https://rdzefykgpcltafuzihfo.supabase.co';
+        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJkemVmeWtncGNsdGFmdXppaGZvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI3MjA5MDYsImV4cCI6MjA4ODI5NjkwNn0.sRIIgb6DaHy5szGO6LiJ6q5IcvYMq5Q4s7yk7cue6S4';
+        const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        const form = document.getElementById('postForm');
+        const status = document.getElementById('status');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            status.innerText = 'Отправка...';
+
+            const title = document.getElementById('title').value;
+            const content = document.getElementById('content').value;
+            const image_url = document.getElementById('image_url').value;
+
+            // ЗАПРОС ПРЯМО В POSTGRES
+            const { data, error } = await supabase
+                .from('posts')
+                .insert([{ title, content, image_url }]);
+
+            if (error) {
+                status.innerText = 'Ошибка: ' + error.message;
+            } else {
+                status.innerText = 'Успешно сохранено в базе!';
+                form.reset();
+            }
+        });
+    </script>
+</body>
+</html>
