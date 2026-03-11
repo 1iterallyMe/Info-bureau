@@ -36,6 +36,56 @@
             </div>
         </header>
 
+        <div class="news_grid">
+        <div class="news_card">
+            <div class="news_image">
+                <img src="/images/post1.png" alt="Новость 1">
+            </div>
+            <div class="news_content">
+                <span class="news_date">12 Марта 2026</span>
+                <h3>Ночь Кино в ИМИТ</h3>
+                <p>Собираемся в пятницу, чтобы посмотреть лучшие новинки этого года и поесть попкорн. Не забудь зарегистрироваться!</p>
+                <a href="#" class="read_more">Читать далее...</a>
+            </div>
         </div>
+
+        <div class="news_card">
+            <div class="news_image">
+                <img src="/images/post2.png" alt="Новость 2">
+            </div>
+            <div class="news_content">
+                <span class="news_date">10 Марта 2026</span>
+                <h3>Набор в медиа-центр</h3>
+                <p>Хочешь снимать крутые видео и делать сочные фото? Мы ждем именно тебя в нашей команде медиа!</p>
+                <a href="#" class="read_more">Читать далее...</a>
+            </div>
+        </div>        
+    </div>
 </body>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => {
+        document.body.classList.add('loaded');
+    }, 200); // Подождет 0.2 секунды перед проявлением
+});
+document.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', function(e) {
+            // Проверяем, что ссылка не пустая и ведет на твой сайт
+            const href = this.getAttribute('href');
+            if (href && !href.startsWith('#') && this.hostname === window.location.hostname) {
+                
+                e.preventDefault(); // Останавливаем мгновенный переход
+                const destination = this.href;
+
+                // Добавляем класс затемнения
+                document.body.classList.add('fade-out');
+
+                // Ждем 500мс (время совпадает с transition в CSS) и переходим
+                setTimeout(() => {
+                    window.location.href = destination;
+                }, 200);
+            }
+        });
+    });
+</script>
 </html>

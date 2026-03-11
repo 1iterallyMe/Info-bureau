@@ -33,5 +33,57 @@
                 <img src="/images/Marks.png" alt="marks" />
             </div>
         </header>
+        <div class="admin_container">
+    <article class="menu-title">ПАНЕЛЬ УПРАВЛЕНИЯ</article>
+    
+    <div class="admin_grid">
+        <div class="admin_card">
+            <div class="card_icon">📝</div>
+            <h3>Новости</h3>
+            <p>Создать новый пост или акцию</p>
+            <button class="admin_btn">Добавить пост</button>
+        </div>
+
+        <div class="admin_card">
+            <div class="card_icon">👤</div>
+            <h3>Персонал</h3>
+            <p>Добавить нового активиста в список</p>
+            <button class="admin_btn">Добавить сотрудника</button>
+        </div>
+
+        <div class="admin_card">
+            <div class="card_icon">⚙️</div>
+            <h3>Настройки</h3>
+            <p>Управление доступом и профилем</p>
+            <button class="admin_btn">Изменить</button>
+        </div>
+    </div>
+</div>
 </body>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => {
+        document.body.classList.add('loaded');
+    }, 200); // Подождет 0.2 секунды перед проявлением
+});
+document.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', function(e) {
+            // Проверяем, что ссылка не пустая и ведет на твой сайт
+            const href = this.getAttribute('href');
+            if (href && !href.startsWith('#') && this.hostname === window.location.hostname) {
+                
+                e.preventDefault(); // Останавливаем мгновенный переход
+                const destination = this.href;
+
+                // Добавляем класс затемнения
+                document.body.classList.add('fade-out');
+
+                // Ждем 500мс (время совпадает с transition в CSS) и переходим
+                setTimeout(() => {
+                    window.location.href = destination;
+                }, 200);
+            }
+        });
+    });
+</script>
 </html>

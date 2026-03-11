@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Новости - Профбюро ИМИТ</title>
     
-    <link rel="stylesheet" href="style_news.css">
+    <link rel="stylesheet" href="style_questions.css">
     
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -35,7 +35,65 @@
                 <img src="/images/Marks.png" alt="marks" />
             </div>
         </header>
+        <div class="faq_container">
+    <article class="faq_title">ЧАСТО ЗАДАВАЕМЫЕ ВОПРОСЫ</article>
+
+    <div class="faq_item">
+        <button class="faq_question">А как стать частью нашего профбюро?</button>
+        <div class="faq_answer">
+            <p>Пишите председателю в ВК @anastayseyshen или его заместитиелю (тоже в ВК) @id363799315</p>
+        </div>
+    </div>
+
+    <div class="faq_item">
+        <button class="faq_question">Есть ли у вас соцсети?</button>
+        <div class="faq_answer">
+            <p>Да, ВК (prof_imit) или телеграмм (https://t.me/profburo_imit)</p>
+        </div>
+    </div>
 
         </div>
+            
+</div>
 </body>
+<script>
+    const faqItems = document.querySelectorAll('.faq_item');
+
+    faqItems.forEach(item => {
+        const question = item.querySelector('.faq_question');
+        question.addEventListener('click', () => {
+            faqItems.forEach(otherItem => {
+                if (otherItem !== item) otherItem.classList.remove('active');
+            });
+            item.classList.toggle('active');
+        });
+    });
+    
+
+
+    window.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => {
+        document.body.classList.add('loaded');
+    }, 200); // Подождет 0.2 секунды перед проявлением
+});
+document.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', function(e) {
+            // Проверяем, что ссылка не пустая и ведет на твой сайт
+            const href = this.getAttribute('href');
+            if (href && !href.startsWith('#') && this.hostname === window.location.hostname) {
+                
+                e.preventDefault(); // Останавливаем мгновенный переход
+                const destination = this.href;
+
+                // Добавляем класс затемнения
+                document.body.classList.add('fade-out');
+
+                // Ждем 500мс (время совпадает с transition в CSS) и переходим
+                setTimeout(() => {
+                    window.location.href = destination;
+                }, 200);
+            }
+        });
+    });
+</script>
 </html>

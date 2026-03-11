@@ -149,4 +149,30 @@
     </div>
 </div>
 </body>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => {
+        document.body.classList.add('loaded');
+    }, 200); // Подождет 0.2 секунды перед проявлением
+});
+document.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', function(e) {
+            // Проверяем, что ссылка не пустая и ведет на твой сайт
+            const href = this.getAttribute('href');
+            if (href && !href.startsWith('#') && this.hostname === window.location.hostname) {
+                
+                e.preventDefault(); // Останавливаем мгновенный переход
+                const destination = this.href;
+
+                // Добавляем класс затемнения
+                document.body.classList.add('fade-out');
+
+                // Ждем 500мс (время совпадает с transition в CSS) и переходим
+                setTimeout(() => {
+                    window.location.href = destination;
+                }, 200);
+            }
+        });
+    });
+</script>
 </html>

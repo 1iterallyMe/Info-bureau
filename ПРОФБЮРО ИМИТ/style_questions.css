@@ -11,7 +11,19 @@ body {
   background-color: #000000;
   margin: 0;
   padding: 0;
+  overflow-x: hidden;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
 }
+body.loaded{
+  opacity: 1;
+  transition: opacity 0.2s ease-in-out;
+}
+body.fade-out {
+  transition: opacity 0.2s ease-in-out;
+    opacity: 0;
+}
+
 
 .section {
   width: 100%;
@@ -115,4 +127,79 @@ a:hover {
   font-size: 18px;
   line-height: 1.6;
   margin-bottom: 20px;
+}
+.faq_container {
+    width: 90%;
+    max-width: 800px;
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.faq_title {
+    font-family: "MoniqaCustom", sans-serif;
+    font-size: clamp(40px, 6vw, 80px);
+    color: white;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.faq_item {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    overflow: hidden;
+    transition: 0.3s;
+}
+
+.faq_question {
+    width: 100%;
+    padding: 20px;
+    background: none;
+    border: none;
+    color: white;
+    font-family: "Mulish", sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.faq_question::after {
+    content: '+';
+    color: #B90F0F;
+    font-size: 24px;
+}
+
+.faq_item:hover {
+    border-color: #B90F0F;
+    background: rgba(185, 15, 15, 0.05);
+}
+
+.faq_answer {
+    padding: 0 20px;
+    max-height: 0; /* Скрыто по умолчанию */
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.faq_answer p {
+    font-family: "Mulish", sans-serif;
+    color: #ccc;
+    line-height: 1.6;
+    padding-bottom: 20px;
+}
+
+/* Класс для открытия (добавляется через JS) */
+.faq_item.active .faq_answer {
+    max-height: 200px; /* Достаточная высота для текста */
+}
+
+.faq_item.active .faq_question::after {
+    content: '−';
 }
